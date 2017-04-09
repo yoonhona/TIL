@@ -16,7 +16,7 @@
     지금 회사서는 vo와 dto가 사실상 동일한 스팩이다.(같이 사용한다)
     파라미터로 사용하는 dto와 정보를 불러올 때 사용하는 vo를 서로 역할을 분리하는 것이 좋다.
   - 테스트 코드에서(junit) db crud는 rollback 이 되는 것으로 알고 있는데 예전에 본 글이 있을텐데 찾아봐야겠다.
-  - 부트 설정시 H2 DB를 선택했는데 프로그램을 띄우면 같이 올라오고 주소는 http://localhost:8000/h2-console
+  - 부트 설정시 H2 DB를 선택했는데 프로그램을 띄우면 같이 올라오고 주소는 http://localhost:8000/h2-console jdbc url : jdbc:h2:mem:testdb
   이다.
   - application.properties
     - 포트 변경 : server.port=8000
