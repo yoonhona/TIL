@@ -1,8 +1,15 @@
 package com.example.article;
 
+import lombok.*;
+
 /**
  * Created by nayoonho on 2017. 4. 8..
  */
+@Getter                 // 빌드 시 어노테이션을 보고 필요한 소스를 빌드 해준다.
+@Setter                 // 빌드된 소스 참고 해보자
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode      // 이펙티브 자바 보자
 public class ArticleCreateRequest {
 
     private Long   id;
@@ -10,26 +17,4 @@ public class ArticleCreateRequest {
     private String author;
     private String body;
 
-    public ArticleCreateRequest(Long id, String title, String author, String body) {
-        this.id     = id;
-        this.title  = title;
-        this.author = author;
-        this.body   = body;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getBody() {
-        return body;
-    }
 }
