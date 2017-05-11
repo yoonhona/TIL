@@ -1,4 +1,5 @@
-# TIL
+# 나윤호 Today I Learned  
+도서, 기술, 세미나 등의 기록
 
 * [책을 읽자](book/README.md)
 
