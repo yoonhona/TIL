@@ -1,6 +1,4 @@
-## TIL
-
-Today I Learned
+## 나윤호 Today I Learned 
 
 #### 참고 글 & Repo
   1. [https://milooy.wordpress.com/2016/07/02/daily-commit-1-year/](https://milooy.wordpress.com/2016/07/02/daily-commit-1-year/)
