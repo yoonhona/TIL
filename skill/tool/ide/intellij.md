@@ -9,5 +9,12 @@
     다음 소스 보기 : alt + cmd + →
     소스 보기 : (소스를 보려는 메소드 혹은 클래스에 커서 위치)cmd + ↓
 
+### Live Templete (약어 작성 후 tab 혹은 자동완성 목록 선택)
+#### Java
+    psvm : main 메서드
 
-
+### 팁
+    오브젝트 형 변수 작성 시
+    ex) User user = new User();
+    new User()를 먼저 타이핑 후 cmd+⇧+V
+    User user = 부분 자동완성
