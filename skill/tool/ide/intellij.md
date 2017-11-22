@@ -15,6 +15,6 @@
 
 ### 팁
     오브젝트 형 변수 작성 시
-    ex) User user = new User();
-    new User()를 먼저 타이핑 후 cmd+⇧+V
-    User user = 부분 자동완성
+        ex) User user = new User();
+        new User()를 먼저 타이핑 후 cmd+alt+V
+        User user = 부분 자동완성
