@@ -1,0 +1,43 @@
+### 토이 프로젝트인 착한가게 게시판 프로잭트 배포를 자동화 해보자
+* Jenkins를 사용하여 자동화
+    - [x] frontend 모듈
+    - [ ] backend 모듈
+* 클라우드 환경 (프리티어 내에서)에 배포 목표
+    - [x] frontend 모듈 : AWS S3 배포
+    - [ ] backend 모듈 : GCP(Google Cloud Plaform) 
+
+* 설정 전 필요사항
+    * Jenkins 서버 혹은 로컬 환경 Jenkins 설치( 나는 로컬에 VirtulBox를 통해 CentOS 설치 후 Jenkins 설치)
+    * AWS 프리티어 계정
+
+1. jenkins 
+    1. jenkins를 띄우기 위해 AWS 혹은 GCP를 사용해도 되나 빌드시 굉장히 느리가니 시양의 제약이 심하다. (프리티어 환경) 그래서 Virtal Box에 Centos를 설치 후 jenkins를 기동하였다.
+    2. 필요 플러그인
+        * Github
+        * Git
+        * NodeJS
+        * S3 publisher
+2. frontend 모듈
+    * npm을 통한 build 되어야 하기 때문에 NodeJS 플러그인과 S3 publisher 플러그인이 설치 되어 있어야 한다.
+    * 프로젝트 빌드 설정
+        1. frontend ITEM 생성 후 구성에서 github repo 연결
+            ![jenkins 1](../image/frontend_1.png)
+            ![jenkins 2](../image/frontend_2.png)
+        2. 빌드 환경 Node.js 설정
+            ![jenkins 3](../image/frontend_3.png)
+        3. 빌드 설정 - Node js 환경 변수 production 설정(API url 설정을 위한), npm build 실행
+            ![jenkins 4](../image/frontend_4.png)
+        4. 빌드 후 배포 설정
+            ![jenkins 5](../image/frontend_5.png)
+            1. 배포 될 소스를 선택(build root path의 하위 지정)한다. [소스](https://github.com/yoonhona/bootVuejsBoard/blob/master/frontend/config/index.js#L8)
+            1. AWS S3 Bucket 명 입력
+            1. AWS S3 Region 선택 - AWS S3 버킷 선택 후 개요 내용의 상단 우측에 표시 됨
+            ![jenkins 6](../image/frontend_6.png)
+    * AWS 관련
+        * AWS 준비 사항
+            1. AWS S3에 배폰 후 정적서버로 사용하기 위한 정리 된 글을 링크한다. [AWS 코리아 사용자 모임 정리 글 링크](https://github.com/awskrug/aws-serverless-workshops/tree/master/WebApplication/1_StaticWebHosting)
+            1. IAM 설정 - [plugin 사이트](https://plugins.jenkins.io/s3)에서 지시하는 데로 설정 혹은 일단 AmazonS3FullAccess 지정 후 진행
+        * Jenkins AWS 설정
+            1. AWS 접근 설정 - AWS IAM 생성한 AccessKey 정보 설정
+            ![jenkins 7](../image/frontend_7.png)
+            ![jenkins 8](../image/frontend_8.png)
