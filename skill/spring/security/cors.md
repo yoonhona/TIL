@@ -1,0 +1,56 @@
+### 스프링 부트 security 에서 cors 설정하기
+
+```
+보안 상의 이유로, 브라우저들은 스크립트 내에서 초기화되는 cross-origin HTTP 요청을 제한합니다.
+```
+[MDN HTTP 접근 제어 (CORS)](https://developer.mozilla.org/ko/docs/Web/HTTP/Access_control_CORS)의 일부. 더 자세한 내용은 링크를 참고
+
+토이 플젝 로그인 기능을 [JWT](https://velopert.com/2389)로 구현 중 HTTP Header를 접근하지 못하는 이슈가 발생하였다.  
+front는 vue.js로 npm으로 띄워 localhost:8082  
+backend는 스프링 부트로 localhost:8080으로 cross-site가 되어 문제가 생기는 것이었다.  
+stack overflow를 뒤지면 굉장히 다양한 방법이 존재한다.  
+
+##### 여기서는 [공식 document](https://docs.spring.io/spring-security/site/docs/current/reference/html/cors.html)의 가이드를 참고 한다. 
+
+스프링 소스 베이스는 [JWT Spring Security Demo
+](https://github.com/szerhusenBC/jwt-spring-security-demo)이고 프론트는 [vue-auth](https://github.com/websanova/vue-auth)를 사용하였다.
+
+[소스참고-1](https://github.com/szerhusenBC/jwt-spring-security-demo/blob/master/src/main/java/org/zerhusen/config/WebSecurityConfig.java#L51)
+```
+httpSecurity
+    // we don't need CSRF because our token is invulnerable
+    .csrf().disable()
+    ...
+```
+기존에는 cors에 대한 설정이 없어 로그인을 실행하면 이와 같이 실행이 안된다.  
+![cors 문제로 실패](./image/cors_1.png)   
+```
+protected void configure(HttpSecurity httpSecurity) throws Exception {
+
+    httpSecurity
+        .cors().and()
+        ......
+}
+
+public CorsConfigurationSource corsConfigurationSource() {
+    final CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:8082"));
+    configuration.setAllowedMethods(Arrays.asList(HttpMethod.GET.name(), HttpMethod.POST.name()));
+    configuration.setAllowCredentials(true);
+    configuration.setAllowedHeaders(
+            Arrays.asList(
+                    HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN,
+                    HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS,
+                    HttpHeaders.CONTENT_TYPE,
+                    jwtHeader
+            )
+    );
+    configuration.addExposedHeader(jwtHeader); 
+    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/auth//**", configuration);
+    return source;
+}
+```
+설정 후 프론트에서 값을 받을 것을 확인 할 수 있다.  
+![설정 후](./image/cors_2.png) 
+ 
