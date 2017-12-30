@@ -2,7 +2,7 @@
 
 ```
 보안 상의 이유로, 브라우저들은 스크립트 내에서 초기화되는 cross-origin HTTP 요청을 제한합니다.
-```
+```   
 [MDN HTTP 접근 제어 (CORS)](https://developer.mozilla.org/ko/docs/Web/HTTP/Access_control_CORS)의 일부. 더 자세한 내용은 링크를 참고
 
 토이 플젝 로그인 기능을 [JWT](https://velopert.com/2389)로 구현 중 HTTP Header를 접근하지 못하는 이슈가 발생하였다.  
