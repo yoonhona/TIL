@@ -5,6 +5,6 @@
   2. [https://github.com/milooy/TIL](https://github.com/milooy/TIL)
   3. [https://github.com/iamkyu/TIL](https://github.com/iamkyu/TIL)
 
-#### TIL 내용을 gitbook과 연결하여 편하게 읽을 수 있도록 하였다.  
-[GitBook 바로가기](https://yoonhona.gitbooks.io/til/content/)  
-[Github 바로 가기](https://github.com/yoonhona)
+
+#### 작성된 글은 [블로그](https://yoonhona.github.io/)의 Post가 된다.
+블로그 소스는 [해당 repo](https://github.com/yoonhona/vue-ghpages-blog)에 있음. 
