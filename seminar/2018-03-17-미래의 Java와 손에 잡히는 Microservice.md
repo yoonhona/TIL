@@ -16,9 +16,7 @@
     - 다언어용 범용 VM
  - Micro Serevices - Java the Unix way 
  - 마이크로 서비스를 도입?? 조직의 특성에 맞게
- 
- ------
- - amber 소개
+- amber [프로젝트 링크](http://openjdk.java.net/projects/amber/) 
     - JEP 286 지역변수 타입, 추론
         - 자바 5 제네릭, 자바 7 다이아몬드, 자바 8 람다식
         - 자바 10 지역변수 ( var )
@@ -38,8 +36,7 @@
         - record class ( POJO 형식 )
         - switch 식 + 타입 비교 + 객체 분해 + 값 비교
         
----
-- vahalla(발할라)
+- vahalla [프로젝트 링크](http://openjdk.java.net/projects/valhalla/) 
     - 자바 제네렉의 한계를 극복하고 참조 타입 때문에 발생하는 자바 성능을 개선
     - 제네릭
         - 함수형 언어에서 말하는 다형성의 형태
@@ -49,7 +46,6 @@
         - 자바 8에 추가된 클래스 규격
     - 메모리 상에서 성능 향상
     
----
-- lOOm (화이버)
+- lOOm [프로젝트 링크](http://openjdk.java.net/projects/loom/) 
     - 자바가 관리하는 경량 쓰레드
     - 현재 시스템에서는 쓰레드도 부족한 상황으로 가고 있어서 더 경량화인 화이버가 개발  
