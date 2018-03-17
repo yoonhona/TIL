@@ -1,5 +1,5 @@
 #### 세미나 정보
-1. 주제 : java 9, msa
+1. 주제 : openjdk, msa
 2. 일시 : 2018년 03월 17일
 3. 주최 : 오라클 코리아
 4. 장소 : 
@@ -48,4 +48,12 @@
     
 - lOOm [프로젝트 링크](http://openjdk.java.net/projects/loom/) 
     - 자바가 관리하는 경량 쓰레드
-    - 현재 시스템에서는 쓰레드도 부족한 상황으로 가고 있어서 더 경량화인 화이버가 개발  
+    - 현재 시스템에서는 쓰레드도 부족한 상황으로 가고 있어서 더 경량화인 화이버가 개발
+    
+    
+#### microservices 실습
+
+- [http://microservices.io/](http://microservices.io/) 
+- [실습 내용 Repo](https://github.com/namoo4u/microservices-demo)
+- [실습 데모 프로젝트](https://github.com/microservices-demo/microservices-demo)
+- [istio Repo](https://github.com/istio/istio)     
