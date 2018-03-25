@@ -7,7 +7,15 @@
  
 ---
 
-### 오전 강의 및 설치
+### minikube MSA 구성해보기
+
+1. minikube 설치, jenkins 설치
+2. 강사님 [repo](https://github.com/hub-tea?tab=repositories) fork
+3. fork 한 프로젝트의 github, docker hub 계정 본인 계정으로 변경 후 push
+4. 로컬에서 docker login 후 jenkins 빌드
+5. minikube dashboard 등으로 서비스 로드 확인 및 서비스 url 확인
+
+### 강의 및 설치
 
 설치 필요  
 - [SDKMAN](http://sdkman.io/sdks.html)
