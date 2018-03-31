@@ -1,6 +1,9 @@
-#### 세미나 정보
+---
 title : 직접 해보면서 배우는 실전 Spring Cloud on Kubernetes
 date : 2018년 03월 24일
+---
+
+#### 세미나 정보
 1. 주제 : 직접 해보면서 배우는 실전 Spring Cloud on Kubernetes 
 2. 일시 : 2018년 03월 24일
 3. 주최 : 한빛출판네트워크
