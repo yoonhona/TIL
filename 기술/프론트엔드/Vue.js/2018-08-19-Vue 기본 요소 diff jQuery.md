@@ -12,6 +12,7 @@
 
 * jQuery  
 $.(selector).on('event', callback());
+
 ```javascript
 <div id="example-1">
     <button id="btn-example">Add 1</button>
@@ -29,6 +30,7 @@ $('#btn-example').on('click', function(){
 
 * Vue.js  
 v-on:event="function"
+
 ```javascript
 <template>
     <div id="example-1">
