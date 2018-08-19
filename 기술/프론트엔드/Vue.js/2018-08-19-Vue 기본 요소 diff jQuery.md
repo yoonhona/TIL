@@ -94,15 +94,12 @@ $('#btn-example').on('click', function(){
 ```
 
 ---
-#### 리스트
-* Vue.js
-
+**리스트**  
+Vue.js
 ```javascript
 <template>
     <table>
-        <tr>
         ...
-        </tr>
         <tr v-for="item in list "> 
             <td>{{ item.id }}</td>
             <td>{{ item.name }}</td>
@@ -126,14 +123,12 @@ export default {
         const self = this;
         getList() {
             this.$http.get('/list')
-            .then(res => res.list)
-            .then(list => {
-                self.list = list;
+            .then(res => {
+                self.list = res.list;
             })
         }
     }
 }
-
 </script>
 
 
