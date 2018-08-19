@@ -1,14 +1,10 @@
-# Vue.js 이벤트, 리스트 처리를 jQuery 비교 해보기
+### Vue.js 이벤트, 리스트 처리를 jQuery 비교 해보기
 
 ![vue logo](https://kr.vuejs.org/images/logo.png)
-
-### The Progressive JavaScript Framework
-
-Vue.js 이벤트, 리스트 처리를 jQuery 비교 해보기
+![jQuery logo](https://brand.jquery.org/resources/jquery-mark-light.gif)
 
 ---
-**이벤트**
-* jQuery  
+**이벤트** jQuery  
 
 ```javascript
 <div id="example-1">
@@ -27,8 +23,7 @@ $('#btn-example').on('click', function(){
 ### **$.(selector).on('event', callback());**
 
 ---
-**이벤트**
-* Vue.js  
+**이벤트** Vue.js  
 
 ```javascript
 <template>
@@ -67,8 +62,7 @@ $('#btn-example').on('click', function(){
 </table>
 ```
 ---
-**리스트**
-* jQuery
+**리스트** jQuery
 ```javascript
 <table id="example">
     ......
@@ -93,8 +87,7 @@ $('#btn-example').on('click', function(){
 </script>
 ```
 ---
-**리스트**  
-Vue.js
+**리스트** Vue.js
 ```javascript
 <template>
     <table>
@@ -131,12 +124,10 @@ export default {
 </script>
 ```
 ---
-**리스트 + 이벤트**  
+**리스트 + 이벤트**  jQuery
 
 요구 사항의 변화 및 증가
 - 아이디를 클릭 시 상세 팝업 .....
-
-jQuery
 ```javascript
 <table id="example">
     ......
@@ -155,11 +146,10 @@ jQuery
         ..... // 팝업
     });
 </script>
-요구사항이 증가 할 수록 한 페이지의 소스양이 증가하고 복잡해진다.
 ```  
+요구사항이 증가 할 수록 한 페이지의 소스양이 증가하고 복잡해진다.
 ---
-**리스트 + 이벤트**  
-Vue.js
+**리스트 + 이벤트** Vue.js
 ```javascript
 <template>
     <table>
