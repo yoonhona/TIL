@@ -7,7 +7,7 @@
 Vue.js 이벤트, 리스트 처리를 jQuery 비교 해보기
 
 ---
-#### 이벤트
+**이벤트**
 * jQuery  
 
 ```javascript
@@ -27,7 +27,7 @@ $('#btn-example').on('click', function(){
 ### **$.(selector).on('event', callback());**
 
 ---
-#### 이벤트
+**이벤트**
 * Vue.js  
 
 ```javascript
@@ -49,7 +49,7 @@ $('#btn-example').on('click', function(){
 ## **v-on:event="function"**
 
 ---
-#### 리스트
+**리스트**
 ```html
 <table>
     <tr>
@@ -67,7 +67,7 @@ $('#btn-example').on('click', function(){
 </table>
 ```
 ---
-#### 리스트
+**리스트**
 * jQuery
 ```javascript
 <table id="example">
@@ -92,7 +92,6 @@ $('#btn-example').on('click', function(){
     });
 </script>
 ```
-
 ---
 **리스트**  
 Vue.js
@@ -120,8 +119,8 @@ export default {
         this.getList();
     },
     methods: {
-        const self = this;
         getList() {
+            const self = this;
             this.$http.get('/list')
             .then(res => {
                 self.list = res.list;
@@ -130,6 +129,113 @@ export default {
     }
 }
 </script>
-
-
 ```
+---
+**리스트 + 이벤트**  
+
+요구 사항의 변화 및 증가
+- 아이디를 클릭 시 상세 팝업 .....
+
+jQuery
+```javascript
+<table id="example">
+    ......
+</table>
+<script>
+    $.ajax('/list', {
+        .....
+    }).done(function(res) {
+        ....
+            var tr = '<tr>' +
+            '<td class="td-id" data-id="' + item.id + '">' + item.id + '</td>' +
+                    ....
+    });
+    $('.td-id').on('click', function(){
+        var id = $(this).data('id');
+        ..... // 팝업
+    });
+</script>
+요구사항이 증가 할 수록 한 페이지의 소스양이 증가하고 복잡해진다.
+```  
+---
+**리스트 + 이벤트**  
+Vue.js
+```javascript
+<template>
+    <table>
+        ...
+        <tr v-for="item in list "> 
+            <td v-on:click="popup">{{ item.id }}</td> // 이벤트를 추가
+        ...
+</template>
+<script>
+export default {
+    name: 'example',
+    data(): {
+        return {
+            list: []
+        }
+    },
+    created() {
+        this.getList();
+    },
+    methods: {
+        getList() {
+            ...
+        },
+        popup() { // 이러면 jQuery와 다를게 없어보인다.
+            ...
+        }
+    }
+}
+</script>
+```
+---
+**컴포넌트**
+
+>기본 HTML 엘리먼트를 확장하여 재사용 가능한 코드를 캡슐화하는 데 도움이 됩니다. 상위 수준에서 컴포넌트는 Vue의 컴파일러에 의해 동작이 추가된 사용자 지정 엘리먼트입니다. (Vue.js 공식 가이드-한국어버전)
+
+```javascript
+App.vue
+<template>
+    <table>
+        ...
+        <tr-example v-for="item in list"
+            v-bind:information="item"
+        >
+</template>
+<script>
+import TrExample from 'TrExample.vue';
+export default {
+    name: 'example',
+    components: [TrExample],
+    methods: {
+        getList() {
+            ...
+        }
+    }
+}
+</script>
+
+TrExample.vue
+<template>
+    <tr v-for="item in information "> 
+        <td v-on:click="popup">{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.address }}</td>
+        <td>{{ item.tel }}</td>
+    </tr>
+</template>
+<script>
+export default {
+    name: 'TrExample',
+    props: ['information'],
+    methods: {
+        popup() {
+            ...
+        }
+    }
+}
+</script>
+```
+
