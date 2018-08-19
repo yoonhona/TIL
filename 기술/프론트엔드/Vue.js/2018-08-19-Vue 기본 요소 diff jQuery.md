@@ -209,6 +209,7 @@ import TrExample from 'TrExample.vue';
 export default {
     name: 'example',
     components: [TrExample],
+    ...
     methods: {
         getList() {
             ...
