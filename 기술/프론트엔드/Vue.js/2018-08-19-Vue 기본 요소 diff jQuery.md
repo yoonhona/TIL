@@ -203,6 +203,8 @@ App.vue
         <tr-example v-for="item in list"
             v-bind:information="item"
         >
+        </tr-example>
+    </table>
 </template>
 <script>
 import TrExample from 'TrExample.vue';
@@ -217,7 +219,10 @@ export default {
     }
 }
 </script>
-
+```
+---
+**컴포넌트**
+```javascript
 TrExample.vue
 <template>
     <tr v-for="item in information "> 
