@@ -11,6 +11,7 @@
 ## 이벤트
 
 * jQuery  
+
 $.(selector).on('event', callback());
 
 ```javascript
@@ -29,6 +30,7 @@ $('#btn-example').on('click', function(){
 ```
 
 * Vue.js  
+
 v-on:event="function"
 
 ```javascript
