@@ -10,13 +10,30 @@
 
 ## 이벤트
 
-v-on:event
+* jQuery  
+$.(selector).on('event', callback());
+```javascript
+<div id="example-1">
+    <button id="btn-example">Add 1</button>
+    <p>위 버튼을 클릭한 횟수는 <span id="span-counter"></span> 번 입니다.</p>
+</div>  
+<script>
+var count = 0;
+$('#btn-example').on('click', function(){
+    count = count + 1;
+    $('#span-counter').text(count);
+});
+</script>
 
+```
+
+* Vue.js  
+v-on:event="function"
 ```javascript
 <template>
     <div id="example-1">
-    <button v-on:click="counter += 1">Add 1</button>
-    <p>위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
+        <button v-on:click="counter += 1">Add 1</button>
+        <p>위 버튼을 클릭한 횟수는 {{ counter }} 번 입니다.</p>
     </div>
 </emplate>
 <script>
@@ -30,4 +47,4 @@ v-on:event
 
 ```
 
-$.(selector).on()
+
