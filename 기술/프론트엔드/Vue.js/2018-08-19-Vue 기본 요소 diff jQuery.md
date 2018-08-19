@@ -7,7 +7,6 @@
 아주 기본적인 Vue.js 기능들을 살펴보며 jQuery와 비교해보자
 
 ---
-
 ## 이벤트
 
 * jQuery  
@@ -28,6 +27,8 @@ $('#btn-example').on('click', function(){
 
 $.(selector).on('event', callback());
 
+---
+## 이벤트
 * Vue.js  
 
 ```javascript
