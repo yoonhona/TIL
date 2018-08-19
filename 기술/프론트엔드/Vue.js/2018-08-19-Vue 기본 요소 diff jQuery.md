@@ -79,7 +79,7 @@ $('#btn-example').on('click', function(){
         .....
     }).done(function(res) {
         var list = res.list;
-        list.forEach(function(item) {
+        list.forEach(function(item) { // html 요소가 javascript 코드에 포함
             var tr = '<tr>' +
                     '<td>' + item.id + '</td>' +
                     '<td>' + item.name + '</td>' +
