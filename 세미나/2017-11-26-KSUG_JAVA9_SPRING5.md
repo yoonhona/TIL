@@ -1,4 +1,5 @@
 #### 세미나 정보
+
 1. 주제 : java 9, spring 5
 2. 일시 : 2017년 11월 26일
 3. 주최 : KSUG
@@ -22,6 +23,7 @@
     - applet deprecate
 
 #### HTTP/2 세대의 Java
+
 개략    
 
     - 네이버 서비스가 http2로 되어있다. 
@@ -30,6 +32,7 @@
     - Keep-Alive 관련 헤더들은 무시됨
     - h2 = HTTP/2 (with TLS), h2c = clear text HTTP/2
     - HTTP/2 왜??? : 더나은 성능
+
 자바에서의 HTTP/2
 
     - 서블릿 4.0 : 서버 Push
@@ -38,8 +41,9 @@
     - H2 지원에 따른 api 사용법
 
 #### JPA2.2, JSON-B, JSON-P
+
 JPA 2.2
-    
+
     - @Repatable 
     - java 8 date time (ZonedDateTime 보류), jdbc time zone 설정 필요
     - Stream for query result 
@@ -56,7 +60,8 @@ JSON-B ( json binding ), JSON-P ( json processing )
     - jsonCollectors
     - 아직은 json-b, p는 나중에... 아직 성능이나 소스도 나이스하지 않아 사용은 추후에
 
-#### Spring 5 New Features	
+#### Spring 5 New Features
+
 왜 이렇게 바뀌어 가냐?? 마이크로 서비스 즉 클라우드 환경에 맞게 변화되어 가고 있다.
 
 유튜브 - 혼돈의 제왕 (넷플릭스가 겪은 클라우드 환경의 내용), cloud native java
@@ -70,6 +75,7 @@ pivotal 기술 블로그에 많은 것들이 있음 <http://engineering.pivotal.
     - xml 설정시 버전 명시 하지 않고 설정하도록 수정 됨.
     - spring-jcl 에서 로깅 을 자동으로 클래스를 지정해준다.
     - @Indexed 어노테이션을 통해 프로그램 로딩 시 스캔할 클래스를 지정할 수 있다.
+
 WEB
 
     - HTTP/2 - tomcat9.0, Jetty 9.3, Undertow1.4
