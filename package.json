@@ -1,0 +1,23 @@
+{
+  "name": "til",
+  "version": "1.0.0",
+  "description": "#### 참고 글 & Repo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node node_modules/vuepress/bin/vuepress.js build ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoonhona/TIL.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yoonhona/TIL/issues"
+  },
+  "homepage": "https://github.com/yoonhona/TIL#readme",
+  "devDependencies": {
+    "vuepress": "^0.14.8"
+  }
+}
