@@ -3,10 +3,10 @@
 ## 1.우리가 지나온 길
 ### 한계 벗어나기
 - 초기 CSS 레이아웃
-  -  float과 postion의 조합으로 이루어짐
+  - float과 postion의 조합으로 이루어짐
   - 컨텐츠 영역의 오른쪽 혹은 왼쪽에 마진을 주고 `사이드바 고정`
   - 푸터를 두거나 컨텐츠보다 사이드바가 길어지면서 문제가 생기가 되고 `고정 높이`를 사용하여 문제를 해결 함
-  > overflow 되는 페이지를 어렵지 않게 볼 수 있게 됨
+  - 하지만 overflow 되는 페이지를 어렵지 않게 볼 수 있게 됨
 - 플로팅 레이아웃
   - [가짜 컴럼](https://alistapart.com/article/fauxcolumns) 이미지를 레이아웃 뒤쪽에 타일 형태로 배치
   - 화면 전체를 채우는 유동 디자인
@@ -75,4 +75,49 @@
 - [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/bfc.html)
   - 예제에서 BFC를 만드는 방법 overflow: hidden, float: left 외에 브라우저가 지원한다면 display: flow-root를 사용하면 다른 부작용없이 사용가능
 #### 흐름 내부와 외부
+- [예제 바로 가기](https://yoonhona.github.io/new-css-layout-code/chapter3/flow.html)
+
+### 플롯
+- 1장에서 이야기한 다중 컬럼 레이아웃이 아닌 CSS 명세 레벨 1에 정의된 shape-out-side 속성을 사용하기 위해 사용하자.
+- [예제 1](https://yoonhona.github.io/new-css-layout-code/chapter3/float-list.html)
+- [예제 2](https://yoonhona.github.io/new-css-layout-code/chapter3/float-shapes.html)
+### 위치 정하기
+- 정적 위치
+  - position: static; (지정하지 않으면 기본 값)
+  - 소스코드의 흐름데로 흐름
+- 상대 위치
+  - position: relative;
+  - offset(top, right, bottom, left)속성을 추가하면 원래 위치에서 이동
+  - 해당 요소는 새론운 컨테이너 블록이 됨
+- 절대 위치
+  - position: absolute; 
+  - 컨테이너의 블록의 가장자리를 기준으로 오프셋 속성에서 설정된 만큼 이동
+  - [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/position-absolute.html)
+  - 예제에서 보면 상대 위치를 활용 부모 div를 컨테이너 블록으로 지정 할 때와 아닐때를 비교
+- 고정 위치
+  - position: fixed;
+  - 화면상 고정된 위치에 존재, 페이지를 스크롤 해도 유지, 콘텐츠가 겹칠수 있으므로 유의
+  - [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/position-fixed.html)
+- 접착 위치
+  - position: sticky;
+  - 스크롤 되기 전에는 정적 위치처럼 동작하다가 스크롤이 되어 일정한 위치에 도달하면 고정 위치처럼 동작
+  - 새로 추가된 값이기 때문에 브라우저 지원 미비
+  - [caniuse](https://caniuse.com/#search=css-sticky)
+  - [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/position-sticky.html)
+
+### 멀티 칼럼 레이아웃
+- column-count 속성의 값에 따라 컴럼을 나눔, 화면이 넓어져도 개수가 많아지지 않음
+- column-width 너비 설정, 컨테이너에 따라 지정한 값의 오차가 생김
+- [caniuse](https://caniuse.com/#feat=multicolumn)
+### 플렉스박스
+- 부모요소에 `display: flex`를 적용하면 자식요소는 자동으로 플렉스 아이템으로 바뀜 [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/flexbox.html)
+- 플렉스 아이템은 한 줄로 배열되고 플렉스 컨테이너의 높이만큰 길어지고, 높이가 똑같아짐  [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/flexbox-wrap.html)
+- 항목이 추가되면 한줄로 계속 늘어나게 되고 켤국 컨테이너를 벗어남
+- 위의 경우에 플렉스 박스에 `flex-wrap: wrap;` 속성을 설정ㅇ하여 여러 줄에 표현되도록 설정
+- 플렉스 아이템에 적정 너비를 설정 `flex: 1 1 200px;`
+- 이 후 1개의 아이템을 제거하면 아래 줄은 두개가 넓어지면서 분배됨 이를 `1차원 레이아웃`이라 함
+- 플렉스박스의 자유도를 제한하여 해결 가능 [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/flexbox-grid.html)
+
+### CSS 그리드 레이아웃
+#### 그리드를 사용한 아이템 배치
 
