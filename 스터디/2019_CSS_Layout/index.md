@@ -119,5 +119,17 @@
 - 플렉스박스의 자유도를 제한하여 해결 가능 [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/flexbox-grid.html)
 
 ### CSS 그리드 레이아웃
+- `2차원 레이아웃`
+- [예제 바로 가기](https://yoonhona.github.io/new-css-layout-code/chapter3/grid-basics.html)
+  - display: grid;
+    - 그리드 컨테이너에 설정
+  - grid-template-columns: 1fr 1fr 1fr;
+    - 공간을 3개로 나누고 균등하게 비율을 가져감, 너비를 설정하지 않아도 그리드를 형성
+  - grid-gap: 20px;
+    - 수평 수직 작 간격 설정
 #### 그리드를 사용한 아이템 배치
-
+- 줄 번호 사용 [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/grid-basics-lines.html)
+  - grid-row, grid-column을 사용한 레이아웃
+- 이름 있는 영역(names area)
+  - grid-area
+  - 

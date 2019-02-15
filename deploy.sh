@@ -5,7 +5,7 @@ set -e
 
 rm -rf .vuepress/dist
 
-# build
+# buildpush
 vuepress build .
 
 # navigate into the build output directory
@@ -24,9 +24,9 @@ if [ $# -eq 1 ]
   then msg="$1"
 fi
 git commit -m "$msg"
-cd
+
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f --set-upstream git@github.com:yoonhona/TIL.git gh-pages
+git push -f git@github.com:yoonhona/TIL.git gh-pages
 
 cd -
 
