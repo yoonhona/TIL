@@ -8,7 +8,8 @@ module.exports = {
             {
                 text: 'CSS',
                 items: [
-                    { text: 'CSS Layout', link: '/스터디/2019_CSS_Layout/' }
+                    { text: 'CSS Layout', link: '/스터디/2019_CSS_Layout/' },
+                    { text: 'Box Model', link: '/스터디/2019_CSS_Layout/box' }
                 ]
             },
             {
