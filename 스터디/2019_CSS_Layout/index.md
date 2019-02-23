@@ -130,6 +130,6 @@
 #### 그리드를 사용한 아이템 배치
 - 줄 번호 사용 [예제 바로 보기](https://yoonhona.github.io/new-css-layout-code/chapter3/grid-basics-lines.html)
   - grid-row, grid-column을 사용한 레이아웃
-- 이름 있는 영역(names area)
-  - grid-area
-  - 
+- 이름 있는 영역(names area)[예제 바로 가기](https://yoonhona.github.io/new-css-layout-code/chapter3/grid-basics-areas.html)
+  - 컨테이너에서 grid-template-areas를 사용 레이아웃의 형태를 정의
+  - 그리드 이이템은 grid-area에 영역의 이름을 정의

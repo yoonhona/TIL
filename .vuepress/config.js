@@ -15,11 +15,15 @@ module.exports = {
             {
                 text: 'Java',
                 items: [
-                    { text: '람다 표현식', link: '/스터디/2019_ReactiveJava/lamda' }
+                    { text: '람다 표현식', link: '/스터디/2019_ReactiveJava/lamda' },
+                    { text: 'RxJava', link: '/스터디/2019_ReactiveJava/RxJava' },
                 ]
             },
         ],
         sidebar: 'auto',
         search: false,
+    },
+    markdown: {
+        lineNumbers: true
     }
 };

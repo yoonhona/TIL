@@ -1,6 +1,6 @@
 # 박스, 블록
 
-> CSS 완벽가이드 7장을 요약 하였습니다.  
+> CSS 완벽가이드 7장 중 일부를 옮겼습니다.  
 > 자세한 내용은 도서를 참고하여 주세요.  
 > 도서는 CSS 2.1에 대해 다루고 있습니다.  
 > [출판사 링크](http://wikibook.co.kr/css-definitive-guide/), [YES24 링크](http://www.yes24.com/Product/goods/3300334)
