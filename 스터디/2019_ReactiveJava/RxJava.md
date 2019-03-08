@@ -167,3 +167,74 @@ Observable<String> source = Observable
                 (num, row) -> num + " * " + row + " = " + dan * row);
 source.subscribe(System.out::println);
 ```
+
+## 변환연산자
+
+### concatMap() 함수
+- [다이어그램 보러가기](https://rxmarbles.com/#concatMap)
+- flatMap() 함수와 유사
+- flatMap() 먼저 들어온 데이터를 처리하는 도중에 데이터가 들어오면 나중에 들어온 데이터의 처리 결과가 먼저 출력될 수도 있음, 이를 `interrleeaving(끼어들기)`라고 함
+- concatMap() 함수는 먼저 들어온 데이터 `순서대로 처리`해서 결과를 낼 수 있도록 보장
+```java{4,10,17,22,24,29}
+CommonUtils.exampleStart();
+String[] balls = {"1", "3", "5"};
+Observable<String> source =
+        Observable.interval(100L, TimeUnit.MILLISECONDS)
+                .map(Long::intValue)
+                .map(idx -> balls[idx])
+                .take(balls.length)
+                .concatMap(
+//              .flatMap(
+                        ball -> Observable.interval(200L, TimeUnit.MILLISECONDS)
+                                .map(notUsed -> ball + "💎")
+                                .take(2)
+                );
+source.subscribe(Log::it);
+CommonUtils.sleep(2000);
+// concatMap() 실행결과
+RxComputationThreadPool-2 | 501 | value = 1💎
+RxComputationThreadPool-2 | 703 | value = 1💎
+RxComputationThreadPool-3 | 906 | value = 3💎
+RxComputationThreadPool-3 | 1106 | value = 3💎
+RxComputationThreadPool-4 | 1308 | value = 5💎
+RxComputationThreadPool-4 | 1507 | value = 5💎
+// flatMap() 실행결과
+RxComputationThreadPool-2 | 574 | value = 1💎
+RxComputationThreadPool-3 | 672 | value = 3💎
+RxComputationThreadPool-4 | 774 | value = 5💎
+RxComputationThreadPool-2 | 774 | value = 1💎
+RxComputationThreadPool-3 | 872 | value = 3💎
+RxComputationThreadPool-4 | 973 | value = 5💎
+```
+### switchMap() 함수]
+- [다이어그램 바로가기](https://rxmarbles.com/#switchMap)
+- concatMap() 함수가 동작의 순서를 보장한다면 switchMap() 함수는 순서를 보장하기 위해 `진행중이던 작업을 중단`
+- 여러개의 값이 발행되었을 때 마지막에 들어온 값의 처리는 보장
+```java
+CommonUtils.exampleStart();
+String[] balls = {"1", "3", "5"};
+Observable<String> source =
+        // balㅣs를 100ms로 발행
+        Observable.interval(100L, TimeUnit.MILLISECONDS)
+                .map(Long::intValue)
+                .map(idx -> balls[idx])
+                .take(balls.length)
+                .doOnNext(Log::dt)
+                .switchMap(
+                        // 다이아몬드를 200ms로 발행
+                        ball -> Observable.interval(200L, TimeUnit.MILLISECONDS)
+                                .map(notUsed -> ball + "💎")
+                                .take(2)
+                );
+source.subscribe(Log::it);
+CommonUtils.sleep(2000);
+// 실행 결과
+RxComputationThreadPool-4 | 758 | value = 5💎
+RxComputationThreadPool-4 | 956 | value = 5💎
+// doOnNext
+RxComputationThreadPool-1 | 346 | debug = 1
+RxComputationThreadPool-1 | 445 | debug = 3
+RxComputationThreadPool-1 | 545 | debug = 5
+RxComputationThreadPool-4 | 746 | value = 5💎
+RxComputationThreadPool-4 | 950 | value = 5💎
+```
