@@ -206,7 +206,7 @@ RxComputationThreadPool-2 | 774 | value = 1💎
 RxComputationThreadPool-3 | 872 | value = 3💎
 RxComputationThreadPool-4 | 973 | value = 5💎
 ```
-### switchMap() 함수]
+### switchMap() 함수
 - [다이어그램 바로가기](https://rxmarbles.com/#switchMap)
 - concatMap() 함수가 동작의 순서를 보장한다면 switchMap() 함수는 순서를 보장하기 위해 `진행중이던 작업을 중단`
 - 여러개의 값이 발행되었을 때 마지막에 들어온 값의 처리는 보장
@@ -237,4 +237,44 @@ RxComputationThreadPool-1 | 445 | debug = 3
 RxComputationThreadPool-1 | 545 | debug = 5
 RxComputationThreadPool-4 | 746 | value = 5💎
 RxComputationThreadPool-4 | 950 | value = 5💎
+```
+### groupBy() 함수
+![groupBy 마블 다이어그램](http://reactivex.io/documentation/operators/images/groupBy.c.png)
+- 어떤 기준으로 단일 Observable을 여러 개로 이루어진 Observable 그룹으로 만듬
+```java
+String[] objs = {"6", "4", "2", "2-T", "6-T", "4-T"};
+Observable<GroupedObservable<String, String>> source
+        = Observable.fromArray(objs).groupBy(Shape::getShape);
+// 그룹 별로 GroupedObservable 생성
+source.subscribe(
+        obj -> {
+                obj
+                // 내부에서 다시 한번 subscribe
+                .subscribe(
+                // getKey() 구분된 그룹
+                        val -> System.out.println("GROUP:" + obj.getKey() + "\t Value:" + val)
+                );
+        }
+);
+// 실행결과
+GROUP:BALL	 Value:6
+GROUP:BALL	 Value:4
+GROUP:BALL	 Value:2
+GROUP:TRIANGLE	 Value:2-T
+GROUP:TRIANGLE	 Value:6-T
+GROUP:TRIANGLE	 Value:4-T
+```
+### scan() 함수
+- [다이어그램](https://rxmarbles.com/#scan)
+- reduce와 비슷하지만 reduce는 마지막 1개의 데이터만을 발행
+- scan()함수는 실행할 때마다 중간 결과 및 최종결과를 발행
+```java
+String[] balls = {"1", "3", "5"};
+Observable<String> source = Observable.fromArray(balls)
+        .scan((ball1, ball2) -> ball2 + "(" + ball1 + ")");
+source.subscribe(Log::i);
+// 실행결과
+main | value = 1
+main | value = 3(1)
+main | value = 5(3(1))
 ```
