@@ -278,3 +278,13 @@ main | value = 1
 main | value = 3(1)
 main | value = 5(3(1))
 ```
+
+## 스케줄러
+### observeOn() 함수의 활용
+- subscribeOn() 함수는 Observerble에서 구독자가 subscribe() 함수를 호출했을 때 데이터 흐름을 발행하는 스레드를 지정
+- onberverOn() 함수는 처리된 결과를 구독자에게 전달하는 스레드를 지정
+- subscribeOn() 함수는 처음지정한 스레드를 고정시키므로 다시 subscribeOn() 함수를 호출해도 무시
+- 다이어그램
+![다이어그램](http://reactivex.io/documentation/operators/images/schedulers.png)
+1. subscripbeOn(<span style="color:blue">▶︎</span>) 호출했을 때는 데이터를 발행하는 첫 줄이 스레드A에서 실행, 이후에는 oberverOn() 함수가 호출될 때 까지 스레드A에서 실행
+2. observerOn()
