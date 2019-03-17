@@ -285,6 +285,55 @@ main | value = 5(3(1))
 - onberverOn() 함수는 처리된 결과를 구독자에게 전달하는 스레드를 지정
 - subscribeOn() 함수는 처음지정한 스레드를 고정시키므로 다시 subscribeOn() 함수를 호출해도 무시
 - 다이어그램
+  - 스레드A **<span style="color:blue">→</span>**
+  - 스레드B **<span style="color:orange">→</span>**
+  - 스레드C **<span style="color:pink">→</span>**
 ![다이어그램](http://reactivex.io/documentation/operators/images/schedulers.png)
 1. subscripbeOn(<span style="color:blue">▶︎</span>) 호출했을 때는 데이터를 발행하는 첫 줄이 스레드A에서 실행, 이후에는 oberverOn() 함수가 호출될 때 까지 스레드A에서 실행
-2. observerOn()
+2. observerOn()를 호출하면 그 다음인 두번째줄부터는 스레드B에서 실행
+3. map(○ --> ☐) 함수는 스레드 변경과는 상관없으므로 세 번째 주른 계속 스레드B 실행을 유지합니다.
+4. 이제 observerOn(<span style="color:pink">▶︎</span>)를 함수를 호출하면 그 다음 데이터 흐름은 스페드 C에서 실행
+
+- 실습 OpenWeatherMap
+```java{7,8,9}
+public void run() {
+Observable<String> source = Observable.just(URL + API_KEY)
+        .map(OkHttpHelper::getWithLog)
+        .subscribeOn(Schedulers.io());
+
+//어떻게 호출을 한번만 하게 할 수 있을까?
+Observable<String> temperature = source.map(this::parseTemperature);
+Observable<String> city = source.map(this::parseCityName);
+Observable<String> country = source.map(this::parseCountry);
+
+CommonUtils.exampleStart();
+Observable.concat(temperature, city, country)
+        .observeOn(Schedulers.newThread())
+        .subscribe(Log::it);
+}
+// 실행결과
+RxCachedThreadScheduler-1 | debug = OkHttp call URL = http://api.openweathermap.org/data/2.5/weather?q=seoul&APPID=eec4f06eeb18b2d285b3ad46e7e16c5f
+RxNewThreadScheduler-1 | 942 | value = "temp":273.79
+RxCachedThreadScheduler-2 | debug = OkHttp call URL = http://api.openweathermap.org/data/2.5/weather?q=seoul&APPID=eec4f06eeb18b2d285b3ad46e7e16c5f
+RxNewThreadScheduler-1 | 1057 | value = "name":"Seoul"
+RxCachedThreadScheduler-1 | debug = OkHttp call URL = http://api.openweathermap.org/data/2.5/weather?q=seoul&APPID=eec4f06eeb18b2d285b3ad46e7e16c5f
+```
+```java{4,5,6,7,9,10,11}
+ public void run() {
+Observable<String> source = Observable.just(URL + API_KEY)
+        .map(OkHttpHelper::getWithLog)
+        .subscribeOn(Schedulers.io())
+        .share() // ConnectableObservable 사용하여 1개의 Observable을 여러 구독자가 공유, 
+                 // 차가운 Observable을 뜨거운 Observable로 변환
+        .observeOn(Schedulers.newThread());
+
+source.map(this::parseTemperature).subscribe(Log::it);
+source.map(this::parseCityName).subscribe(Log::it);
+source.map(this::parseCountry).subscribe(Log::it);
+}
+// 실행결과
+RxCachedThreadScheduler-1 | debug = OkHttp call URL = http://api.openweathermap.org/data/2.5/weather?q=seoul&APPID=eec4f06eeb18b2d285b3ad46e7e16c5f
+RxNewThreadScheduler-2 | 1115 | value = "name":"Seoul"
+RxNewThreadScheduler-3 | 1115 | value = "country":"KR"
+RxNewThreadScheduler-1 | 1116 | value = "temp":273.79
+```
