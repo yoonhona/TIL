@@ -19,6 +19,12 @@ module.exports = {
                     { text: 'RxJava', link: '/스터디/2019_ReactiveJava/RxJava' },
                 ]
             },
+            {
+                text: '협업',
+                items: [
+                    { text: 'Gitflow(with Gitlab)', link: '/기술/협업/git_flow' },
+                ]
+            },
         ],
         sidebar: 'auto',
         search: false,
