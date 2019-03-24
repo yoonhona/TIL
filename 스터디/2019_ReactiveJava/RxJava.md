@@ -285,10 +285,10 @@ main | value = 5(3(1))
 - onberverOn() 함수는 처리된 결과를 구독자에게 전달하는 스레드를 지정
 - subscribeOn() 함수는 처음지정한 스레드를 고정시키므로 다시 subscribeOn() 함수를 호출해도 무시
 - 다이어그램
-  - 스레드A **<span style="color:blue">→</span>**
-  - 스레드B **<span style="color:orange">→</span>**
-  - 스레드C **<span style="color:pink">→</span>**
 ![다이어그램](http://reactivex.io/documentation/operators/images/schedulers.png)
+- 스레드A **<span style="color:blue">→</span>**
+- 스레드B **<span style="color:orange">→</span>**
+- 스레드C **<span style="color:pink">→</span>**
 1. subscripbeOn(<span style="color:blue">▶︎</span>) 호출했을 때는 데이터를 발행하는 첫 줄이 스레드A에서 실행, 이후에는 oberverOn() 함수가 호출될 때 까지 스레드A에서 실행
 2. observerOn()를 호출하면 그 다음인 두번째줄부터는 스레드B에서 실행
 3. map(○ --> ☐) 함수는 스레드 변경과는 상관없으므로 세 번째 주른 계속 스레드B 실행을 유지합니다.
@@ -336,4 +336,101 @@ RxCachedThreadScheduler-1 | debug = OkHttp call URL = http://api.openweathermap.
 RxNewThreadScheduler-2 | 1115 | value = "name":"Seoul"
 RxNewThreadScheduler-3 | 1115 | value = "country":"KR"
 RxNewThreadScheduler-1 | 1116 | value = "temp":273.79
+```
+## 테스팅과 Flowable
+### Flowable 클래스
+- Rxjava 2.x에 도입된 클래스
+- 배압(backpressure) 이슈를 위해 별도 분리한 클래스
+  - 도입한 이유
+  - Observable 클래스의 성능 향상, 배압에 관한 처리가 불필요한 경우에도 초기 로딩 때문에 약간의 오버헤드 발생
+- Flowable 클래스의 활용은 기본적으로 동일
+```java
+Flowable.just("Hello world")
+.subscribe(new Consumer<String>() {
+        @override public void accept(String s) {
+                System.out.println(s);
+        }
+        }
+);      
+
+Flowable.fromCallable(() -> {
+        Thread.sleep(1000);
+        return "done";
+})
+.subscribeOn(Schedulers.io())
+.observeOn(Schedulers.single())
+.subscribe(System.out::println, Throwable::printStackTrace);
+```
+#### Observable과 Flowable의 선택기준
+- Observable
+  - 최대 1,000개 미만의 데이터 흐름(Out of Mememory Exception 발생 가능성이 거의 없는 경우)
+  - 마우스, 터치 이벤트를 다루는 GUI 프로그래밍, 이 경우는 배압 이슈가 거의 발생하지 않음. Observable로는 초당 1,000회 이하의 이벤트를 다루는데 이때 sample()dlsk debounce)() 같은 흐름 제어 함수를 활용
+  - 데이터 흐름이 본질적으로 동기 방식이지만 프로젝트에서 사용하는 플랫폼이 자바 Stream API나 그에 준하는 기능을 제공하지 않을 때, Observable은 보통 Flowable과 비교했을 때 선으 오버헤드가 낮음
+- Flowable
+  - 특정 방식으로 생성된 10,000개 이상의 데이터를 처리하는 경우. 이 때 메서드 체인에서 데이터 소스에 데이터 개수 제한을 요청해야 함
+  - 디스크에서 파일을 읽어 들일 경우 본질적으로 블로킹 I/O 방식을 활용하고 내가 원하는 만큼 가져오는 방식(pull-based)으로 처리해야 함. 예를 들면 특정 단위로 잘라 몇 행씩 가져오도록 제어 할 수 있다.
+  - JDBC를 활용해 데이터베이스의 쿼리 결과를 가져오는 경우. 블로킹 방식을 이용하므로 ResultSet.next()를 호출하는 방식으로 쿼리의 결과를 읽어로도록 제어할수 있다.
+  - 네크워크 I/O를 실행하는 경우. 네트워크ㄹ나 프로토콜을 통해 서버에서 가져오길 원하는 만큼의 데이터양을 오청할 수 있을 때
+  - 다수의 블로킹 방식을 사용하거나 가져오는 방식(pull-based)의 데이터 소스가 미래에는 논 브로킹(non-blocking) 방식의 리액티브 API나 드라이버를 제공할 수도 있는 경우
+#### Flowable 배압 이슈 대응
+배앞 이슈 대응 함수
+- onBackpressureBuffer(): 배압 이슈가 발생했을 대 별도의 버퍼에 저장, Flowable 클래스는 기본적으로 128개의 버퍼가 있음
+  - 오버로딩 메소드    
+```java
+// 기본 버퍼개수(128개)
+public final Flowable<T> onBackpressureBuffer()
+// delayError: true면 예외가 발생했을 때 버퍼에 쌓인 데이터를 모두 처리할 때까지 예외를 던지지 않음
+// delayError: false면 예외가 발생했을 대 바로 다운스트림에 예외를 던짐
+// delayError 기본값은 false
+public final Flowable<T> onBackpressureBuffer(boolean delayError)
+// capacity: 버퍼개수
+// onOverflow: 버퍼가 넘쳤을 때 실행할 동작
+public final Flowable<T> onBackpressureBuffer(int capacity, Action onOverflow)
+// 버퍼가 가듯 찼을 때 추가로 실행하는 전략을 지정
+public final Flowable<T> onBackpressureBuffer(long capacity, Action onOverflow, BackpressreOverflowStrategy onverflowStrategy)
+// 지정 가능한 전략
+public enum BackpressureOverflowStrategy {
+        ERROR, // MissingBackpressureException 예외를 던지고 데이터 흐름을 중단
+        DROP_OLDEST, // 버퍼에 쌓여있는 최근 값을 제거
+        DROP_LATEST // 버퍼에 쌓여 있는 가장 오래된 값을 제거
+}
+```
+- onBackpressureDrop(): 배압 이슈가 발생했을 때 해당 데이터를 무시
+```java
+Flowable.range(1, 50_000_000)
+        .onBackpressureDrop()
+        .observeOn(Schedulers.computation())
+        .subscribe(data -> {
+                //100ms후 데이터를 처리함
+                CommonUtils.sleep(100);
+                Log.it(data);
+        }, err -> Log.e(err.toString()));
+
+CommonUtils.sleep(20_000);
+// 결과
+RxComputationThreadPool-1 | 13494 | value = 125
+RxComputationThreadPool-1 | 13599 | value = 126
+RxComputationThreadPool-1 | 13704 | value = 127
+RxComputationThreadPool-1 | 13808 | value = 128
+```
+- onBackpressureLatest(): 처리할 수 없어서 쌓이는 데이터를 무시하면서 최신 데이터만 유지
+```java
+Flowable.range(1, 50_000_000)
+        .onBackpressureLatest()
+        .observeOn(Schedulers.computation())
+        .subscribe(data -> {
+                //100ms후 데이터를 처리함
+                CommonUtils.sleep(100);
+                Log.it(data);
+        }, err -> Log.e(err.toString()));
+
+CommonUtils.sleep(20_000);
+// 실행결과
+
+RxComputationThreadPool-1 | 13097 | value = 124
+RxComputationThreadPool-1 | 13198 | value = 125
+RxComputationThreadPool-1 | 13301 | value = 126
+RxComputationThreadPool-1 | 13405 | value = 127
+RxComputationThreadPool-1 | 13510 | value = 128
+RxComputationThreadPool-1 | 13614 | value = 50000000
 ```
