@@ -17,6 +17,7 @@ module.exports = {
                 items: [
                     { text: '람다 표현식', link: '/스터디/2019_ReactiveJava/lamda' },
                     { text: 'RxJava', link: '/스터디/2019_ReactiveJava/RxJava' },
+                    { text: 'Reactor', link: '/스터디/2019_ReactiveJava/Reactor' },
                 ]
             },
             {
