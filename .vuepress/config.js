@@ -6,6 +6,12 @@ module.exports = {
     themeConfig: {
         nav: [
             {
+                text: 'TestCode',
+                items: [
+                    { text: 'Ract & Jest', link: '/기술/프론트엔드/Test/jest_react' },
+                ]
+            },
+            {
                 text: 'CSS',
                 items: [
                     { text: 'CSS Layout', link: '/스터디/2019_CSS_Layout/' },
