@@ -6,7 +6,7 @@ set -e
 rm -rf .vuepress/dist
 
 # buildpush
-vuepress build .
+yarn build
 
 # navigate into the build output directory
 cd .vuepress/dist
@@ -26,7 +26,7 @@ fi
 git commit -m "$msg"
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f https://github.com/yoonhona/TIL.git gh-pages
+git push -f https://github.com/yoonhona/study.git gh-pages
 
 cd -
 

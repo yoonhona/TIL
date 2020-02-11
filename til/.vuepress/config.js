@@ -1,10 +1,16 @@
-const PREFIX = '/TIL/';
+const PREFIX = '/study/';
 
 module.exports = {
     base: PREFIX,
     title: '나윤호 TIL',
     themeConfig: {
         nav: [
+            {
+                text: 'Ract',
+                items: [
+                    { text: '실전 리액트 프로그래밍 CH.2', link: '/기술/프론트엔드/React.js/실전_리액트/ch2' },
+                ]
+            },
             {
                 text: 'TestCode',
                 items: [
