@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
@@ -21,7 +22,6 @@ module.exports = {
 
   module: {
     rules: [
-      // we use babel-loader to load our jsx and tsx files
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
@@ -36,7 +36,15 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/public/index.html')
-    })
+    }),
+    new CopyPlugin([{
+      context: 'public',
+      from: '**',
+      to: '.',
+      ignore: [
+        'index.html'
+      ]
+    }])
   ],
 
   devServer: {
