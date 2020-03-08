@@ -4,18 +4,20 @@
 
 * [ ] Typescript 설정
   * [x] Babel preset 설정
-  * [ ] esLint 설정
+* [ ] 포맷팅
+  * [ ] eslint
 * [ ] Webpack
   * [x] Babel loader
   * [x] 코드상 포함되지 않은 static 파일 복사
-  * [ ] code split
+  * [x] code split
   * [ ] dev-server
     * [ ] proxy
-    * [ ] 기타 기본 설정
-* [ ] dotenv
+    * [x] 기타 기본 설정
+* [ ] Dotenv
 * [ ] mock 설정
   * [ ] local 개발
-* [ ] storybook 설정
+* [x] storybook 설정
+* [x] styled-components
 
 ## 참고
 [TypeScript and Babel 7](https://devblogs.microsoft.com/typescript/typescript-and-babel-7/)

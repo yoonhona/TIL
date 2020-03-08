@@ -80,18 +80,12 @@ module.exports = {
   devServer: {
     host: '0.0.0.0',
     port: '1234',
-
     publicPath: '/',
-
-    clientLogLevel: 'none',
-
     compress: true,
-
     disableHostCheck: true,
-
     contentBase          : path.join(__dirname, 'public'),
     contentBasePublicPath: '/',
-
     hot: true,
+    overlay: true
   },
 }
