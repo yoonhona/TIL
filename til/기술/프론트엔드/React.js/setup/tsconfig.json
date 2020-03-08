@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
+    "target": "ESNext",
     "module": "ESNext",
-    "strict": true,
     "jsx": "react",
-    "target": "ES5",
+    "strict": true,
     "allowJs": true,
-    "allowSyntheticDefaultImports": true
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"]
+    }
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

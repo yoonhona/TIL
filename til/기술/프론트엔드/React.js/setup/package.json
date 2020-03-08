@@ -5,7 +5,8 @@
   "author": "nyh",
   "dependencies": {
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
@@ -18,6 +19,9 @@
     "@babel/preset-typescript": "^7.8.3",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
+    "@types/styled-components": "^5.0.1",
+    "babel-plugin-styled-components": "^1.10.7",
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "html-webpack-plugin": "^3.2.0",
     "typescript": "^3.8.3",
@@ -25,7 +29,10 @@
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --mode development --hot --open",
-    "build": "webpack --mode production"
-  }
+    "start": "NODE_ENV=development webpack-dev-server",
+    "build": "NODE_ENV=production webpack"
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }
