@@ -1,7 +1,6 @@
 # jest 설정
 
-1. 바벨 설정 사용
-
+##  바벨 설정 사용
 jest 테스트를 돌리는 환경은 node.js이고 테스트의 대상이 되는 코드는 대개 바벨 +
 webpack + 프론트 프레임워크(React, Vue, Angular 등)등의 복합적인 구성으로
 설정되어있는 환경일 것이다.
@@ -25,6 +24,7 @@ babel-jest 플러그인은 기본적으로 프로젝트의 .babelrc 가져오고
 추가적이 설정도 가능하다.
 
 ```js
+// jest.config.js
 module.exports = {
     ...
     transform: {
@@ -38,4 +38,34 @@ module.exports = {
     },
 };
 
+```
+
+## 소스코드 경로 관련
+
+테스트 대상 코드를 import 경로를 상대 경로가 아닌 절대경로로 지정하기 위한
+설정으로 `moduleNameMapper`가 있으며
+
+아래와 같이 테스트 코드를 작성할 때 테스트 대상 코드는 `src/sum.js`이고,  
+하지만 절대 경로로 `src`위치를 지정해주지 않으면 jest는 해당 파일을 찾을 수
+없기에  
+`Cannot find module 'src/sum'`이라고 테스트를 실행할 수 없다는 경고를
+노출한다.
+```js
+import sum from "src/sum";
+
+test("adds 1 + 2 to equal 3", () => {
+    expect(sum(1, 2)).toBe(3);
+});
+
+```
+이제 설정에서 `moduleNameMapper` 추가혀여 `src` 경로를 지정해주면 관련된
+경고는 사라지고 테스트를 실행할 수 있는 환경이 구성된다.
+```js
+// jest.config.js
+module.exports = {
+    ...
+    moduleNameMapper: {
+        "src/(.*)": "<rootDir>/src/$1",
+    },
+}
 ```
