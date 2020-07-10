@@ -1,0 +1,16 @@
+{
+  "name": "babel",
+  "version": "1.0.0",
+  "description": "바벨 학습",
+  "main": "index.js",
+  "author": "nyh",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "trans": "babel src --out-dir build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/cli": "^7.10.4"
+  }
+}
