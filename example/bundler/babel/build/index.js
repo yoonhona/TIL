@@ -3,4 +3,4 @@ class Index {
     this.text = 'test';
   }
 
-}˚
+}

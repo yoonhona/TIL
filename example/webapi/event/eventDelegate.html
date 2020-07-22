@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Evet Delegate</title>
+</head>
+<body>
+<div id="wrapper">
+    <ul id="list">
+        <li class="listItem" value="1">1</li>
+        <li class="listItem" value="2">2</li>
+        <li class="listItem" value="3">3</li>
+        <li class="listItem" value="4">4</li>
+        <li class="listItem" value="5">5</li>
+        <li class="listItem" value="6">6</li>
+    </ul>
+</div>
+<script type="application/javascript">
+    const wrapper = document.getElementById('wrapper');
+    wrapper.addEventListener('click', (e) => {
+        console.log(e)
+    })
+</script>
+</body>
+</html>
