@@ -6,20 +6,31 @@
 </head>
 <body>
 <div id="wrapper">
-    <ul id="list">
-        <li class="listItem" value="1">1</li>
-        <li class="listItem" value="2">2</li>
-        <li class="listItem" value="3">3</li>
-        <li class="listItem" value="4">4</li>
-        <li class="listItem" value="5">5</li>
-        <li class="listItem" value="6">6</li>
-    </ul>
+    <form>
+        <input type="radio" name="event" value="1" id="1"><label for="1">1</label>
+        <input type="radio" name="event" value="2" id="2"><label for="2">2</label>
+        <input type="radio" name="event" value="3" id="3"><label for="3">3</label>
+        <input type="radio" name="event" value="4" id="4"><label for="4">4</label>
+
+    </form>
 </div>
 <script type="application/javascript">
     const wrapper = document.getElementById('wrapper');
     wrapper.addEventListener('click', (e) => {
-        console.log(e)
+        console.log('click event:: ', e.target)
     })
+
+    wrapper.addEventListener('change', e => {
+      console.log('change capture:: ', e.target);
+      e.stopPropagation();
+    }, {
+      capture: true
+    })
+    const element2 = document.getElementById('2');
+    element2.addEventListener('change', (e) => {
+      console.log('element change event:: ', e)
+    })
+
 </script>
 </body>
 </html>
