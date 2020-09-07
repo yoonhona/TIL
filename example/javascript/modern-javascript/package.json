@@ -1,0 +1,19 @@
+{
+  "name": "modern-javascript",
+  "version": "1.0.0",
+  "description": "모던 자바스크립트 내용 학습 코드",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0"
+  }
+}
