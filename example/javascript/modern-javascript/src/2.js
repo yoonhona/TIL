@@ -1,5 +1,5 @@
 
-// 2.1.2 p17
+// 2.1.2
 function codePointAt () {
   const text = '가a';
 
@@ -9,7 +9,6 @@ function codePointAt () {
   console.log(text.codePointAt(0))
   console.log(text.codePointAt(1))
 }
-codePointAt()
 
 // 2.1.4
 function normalize() {
@@ -22,7 +21,6 @@ function normalize() {
   const nfkd = '가나다라닭 ABCD abcd'.normalize('NFKD')
   console.log(nfkd, nfkd.length)
 }
-normalize()
 
 // 2.1.5
 export function regexNoUflag (text = '') {
