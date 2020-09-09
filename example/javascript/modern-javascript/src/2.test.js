@@ -66,6 +66,35 @@ test('정규표현석 y 플래그', () => {
   expect(globalPattern.lastIndex).toEqual(14)
   // 매칭이 없으면 0으로 초기화
   expect(stickyPattern.lastIndex).toEqual(0)
+})
 
+// 2.3.2
+test('정규표현식 복사', () => {
+  const regex = /ab/i,
+        // es6에 추가된 문법 es5이하에서는 문법 오류
+        // 복사하면서 플래그 변경 가능
+        regex2 = new RegExp(regex, 'g');
 
+  expect(regex.toString()).toEqual('/ab/i')
+  expect(regex2.toString()).toEqual('/ab/g')
+
+  const testMsg = 'ab';
+  expect(regex.test(testMsg)).toEqual(true)
+  expect(regex2.test(testMsg)).toEqual(true)
+
+  const testMsg2 = 'AB';
+  expect(regex.test(testMsg2)).toEqual(true)
+  expect(regex2.test(testMsg2)).toEqual(false)
+})
+
+/**
+ * 2.3.3
+ * es5 이하에서는 정규 표현식의 flag를 알기 위해서는 문자열 변환 후 파싱해서 사용
+ * es6에서는 flags 프로퍼티가 추가되어 편하게 사용가능해짐
+ */
+test('정규 표현식 flags 프로퍼티', () => {
+  const testRegex = /test/gi;
+
+  expect(testRegex.toString().split('/')[2]).toEqual('gi')
+  expect(testRegex.flags).toEqual('gi')
 })
