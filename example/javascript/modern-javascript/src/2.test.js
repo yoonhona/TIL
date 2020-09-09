@@ -98,3 +98,33 @@ test('정규 표현식 flags 프로퍼티', () => {
   expect(testRegex.toString().split('/')[2]).toEqual('gi')
   expect(testRegex.flags).toEqual('gi')
 })
+
+// 2.4.1
+test('템플릿 리터럴 문자열 - 기본문법', () => {
+  const message = `\`Hello World!\``;
+  expect(message).toEqual('`Hello World!`')
+})
+
+// 2.4.2
+test('템플릿 리터럴 문자열 - 멀티 라인', () => {
+  const msg = `가나다라
+마`
+  // 글자는 5글자이지만 중간에 개행이 되면서 length가 6이된다.
+  expect(msg).toHaveLength(6)
+
+  const msg2 = '가나다라\n마'
+  // 중간에 \n을 사용해도 동일
+  expect(msg2).toHaveLength(6)
+})
+
+// 2.4.3
+test('템플릿 리터럴 문자열 - 치환자', () => {
+  const name = 'nyh',
+        message = `Hello ${name}`;
+  expect(message).toEqual('Hello nyh')
+
+  const count = 10,
+        price = 0.25,
+        message2 = `${count} item cost ${(count * price).toFixed(2)}`
+  expect(message2).toEqual('10 item cost 2.50')
+})
