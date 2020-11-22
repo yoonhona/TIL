@@ -108,3 +108,58 @@ describe("2.1 const, let", () => {
     });
   });
 });
+
+describe("2.2 객체와 배열의 사용성 개선", () => {
+  describe("객체, 배열 간편하게 생성 및 수정", () => {
+    test("단축 속서성명", () => {
+      const name = "mike";
+      const obj = {
+        name,
+        age: "33",
+      };
+
+      expect(obj.name).toEqual(name);
+    });
+    test("계산된 속성명 computed property names", () => {
+      function makeObj(key, value) {
+        return { [key]: value };
+      }
+      const key = "key";
+      const value = "value";
+      expect(makeObj());
+    });
+  });
+
+  describe("객체와 배열의 속성값을 간편하게 가져오기", () => {
+    test("전개 연산자", () => {
+      const obj = {
+        age: 23,
+        name: "mike",
+      };
+      const arr = [1, 2, 3];
+
+      const obj2 = { ...obj };
+      const arr2 = [...arr];
+
+      expect(obj2).toEqual(obj);
+      expect(arr2).toEqual(arr);
+    });
+
+    test("배열 비구조화", () => {
+      const arr = [1, 2];
+      const [a, b = 20, c = 10] = arr;
+      expect(a).toEqual(1);
+      expect(b).toEqual(2);
+      expect(c).toEqual(10);
+    });
+
+    test("객체 비구조화", () => {
+      const obj = { age: 21, name: "mike", address: "서울시" };
+      const { name, age, address: addr, gender = "M" } = obj;
+      expect(name).toEqual(obj.name);
+      expect(age).toEqual(obj.age);
+      expect(addr).toEqual(obj.address);
+      expect(gender).toEqual("M");
+    });
+  });
+});
