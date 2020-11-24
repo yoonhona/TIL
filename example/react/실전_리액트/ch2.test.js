@@ -163,3 +163,63 @@ describe("2.2 객체와 배열의 사용성 개선", () => {
     });
   });
 });
+
+describe("2.3 강화된 함수의 기능", () => {
+  describe("2.3.1 매개변수", () => {
+    test("매개변수 기본값", () => {
+      function argsDefault(a = 1) {
+        return a;
+      }
+
+      expect(argsDefault()).toEqual(1);
+    });
+
+    test("나머지 매개변수", () => {
+      function argsRest(a, ...rest) {
+        return rest;
+      }
+
+      expect(argsRest(1, 2, 3)).toEqual([2, 3]);
+    });
+
+    test("명명된 매개변수", () => {
+      function namedParameter({ name, age = 19 }) {
+        return { name, age };
+      }
+
+      const result = namedParameter({ name: "mike" });
+      expect(result.name).toEqual("mike");
+      expect(result.age).toEqual(19);
+    });
+  });
+
+  test("화살표 함수", () => {
+    if (true) {
+      const obj = {
+        value: 1,
+        increase: function () {
+          this.value++;
+        },
+      };
+      obj.increase();
+      expect(obj.value).toEqual(2);
+      const increase = obj.increase;
+      increase();
+      expect(obj.value).toEqual(2);
+    }
+
+    if (true) {
+      function Something() {
+        this.value = 1;
+        this.increase = () => this.value++;
+      }
+
+      const obj = new Something();
+      obj.increase();
+      expect(obj.value).toEqual(2);
+      const increase = obj.increase;
+      increase();
+      expect(obj.value).toEqual(3);
+    }
+  });
+});
