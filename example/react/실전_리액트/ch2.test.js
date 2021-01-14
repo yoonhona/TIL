@@ -187,7 +187,7 @@ describe("2.3 강화된 함수의 기능", () => {
         return { name, age };
       }
 
-      const result = namedParameter({ name: "mike" });
+      const result = namedParameter({ key: "mike" });
       expect(result.name).toEqual("mike");
       expect(result.age).toEqual(19);
     });

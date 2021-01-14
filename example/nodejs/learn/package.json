@@ -1,0 +1,11 @@
+{
+  "name": "learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "args": "node cmdArguments.js nome=joe"
+  },
+  "author": "",
+  "license": "ISC"
+}
